@@ -2,9 +2,14 @@ kind: pipeline
 name: default
 
 steps:
-- name: test
+- name: test_build
   image: node
   commands:
   - npm install
   - npm run build
-    ##
+- name: testing if same container
+  image: nginx
+  commands:
+  - ls ./dist
+
+
