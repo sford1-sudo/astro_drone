@@ -36,6 +36,7 @@ steps:
     command_timeout: 2m
     script:
       - echo "starting docker deploy" >> astro.log
+      - docker pull sford1sudo/astro:latest
       - docker run -d -p 80:80 sford1sudo/astro:latest
       - echo "Docker container started successfully" >> astro.log
     when:
