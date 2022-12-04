@@ -38,9 +38,9 @@ steps:
       - echo "starting docker deploy" >> astro.log
       - docker run -d -p 80:80 sford1sudo/astro:latest
       - echo "Docker container started successfully" >> astro.log
-        #  when:
-        #event:
-        # - promote
-        #target:
-        #- production
+    when:
+      event:
+      - promote
+      target:
+      - production
 
