@@ -15,8 +15,10 @@ steps:
       from_secret: dhubpass
     repo: sford1sudo/astro
     tags: latest
-- name: slack notification
-  image: plugins/slack
+- name: discord notification
+  image: appleboy/drone-discord
   settings:
-    webhook: https://hooks.slack.com/services/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
-    channel: nothin
+    webhook_id:
+      from_secret: discordwebhookid
+    webhook_token: 
+      from_secret: discordwebhooktoken
