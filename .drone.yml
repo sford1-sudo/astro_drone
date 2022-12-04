@@ -23,3 +23,24 @@ steps:
     webhook_token:
       from_secret: discordwebhooktoken
     message: "Astro site has been built and pushed to dockerhub successfully... please deploy with ansible playbook when ready for production"
+- name: ssh-deploy
+  image: appleboy/drone-ssh
+  settings:
+    host:
+      - 192.168.1.38
+#      - example2.com
+    username: root
+    password:
+      from_secret: ssh_password
+    port: 22
+    command_timeout: 2m
+    script:
+      - echo "starting docker deploy" >> astro.log
+      - docker run -d -p 80:80 sford1sudo/astro:latest
+      - echo "Docker container started successfully" >> astro.log
+        #  when:
+        #event:
+        # - promote
+        #target:
+        #- production
+
