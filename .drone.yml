@@ -8,11 +8,15 @@ steps:
   - npm install
   - npm run build
 - name: push to dockerhub
-  image: pligins/docker
+  image: plugins/docker
   settings:
     username: sford1sudo
     password:
       from_secret: dhubpass
     repo: sford1sudo/astro
     tags: latest
-
+- name: slack notification
+  image: plugins/slack
+  settings:
+    webhook: https://hooks.slack.com/services/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
+    channel: nothin
