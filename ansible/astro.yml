@@ -1,13 +1,23 @@
 - hosts: webservers
-  become: true
-
   tasks:
+    - name: Install pip
+      apt:
+        pkg:
+          - python3-pip
+        state: present
+    - name: install docker-py library
+      pip:
+        name: docker-py
 
+    - name: pull image
+      docker_image:
+        name: mtabishk/ansible-container-node
+        source: pull
     - name: ensure sford1sudo/astro container is running
       docker_container:
-        name: astro
+        name: astro_website
         state: started
-        image: "sford1sudo/astro:latest"
-        pull: true
+        image: sford1sudo/astro:latest
+        restart: yes
         ports:
           - "80:80"

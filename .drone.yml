@@ -28,6 +28,7 @@ steps:
   settings:
     playbook: ansible/astro.yml
     inventory: ansible/hosts
+    user: root
     syntax_check: true
 - name: discord notify ansible
   image: appleboy/drone-discord
