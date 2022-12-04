@@ -22,3 +22,4 @@ steps:
       from_secret: discordwebhookid
     webhook_token: 
       from_secret: discordwebhooktoken
+    message: "Astro site has been built and pushed to dockerhub successfully"
