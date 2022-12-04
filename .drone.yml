@@ -2,14 +2,17 @@ kind: pipeline
 name: default
 
 steps:
-- name: test_build
+- name: build astro
   image: node
   commands:
   - npm install
   - npm run build
-- name: testing if same container
-  image: nginx
-  commands:
-  - ls ./dist
-
+- name: push to dockerhub
+  image: pligins/docker
+  settings:
+    username: sford1sudo
+    password:
+      from_secret: dhubpass
+    repo: sford1sudo/astro
+    tags: latest
 
