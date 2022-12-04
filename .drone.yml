@@ -1,42 +1,11 @@
 kind: pipeline
-name: AstroJS
+type: exec
+name: test ansible
+platform:
+  os: linux
+  arch: amd64
 
 steps:
-- name: build astro
-  image: node
+- name: greeting
   commands:
-  - npm install
-  - npm run build
-- name: push to dockerhub
-  image: plugins/docker
-  settings:
-    username: sford1sudo
-    password:
-      from_secret: dhubpass
-    repo: sford1sudo/astro
-    tags: latest
-- name: discord notify docker
-  image: appleboy/drone-discord
-  settings:
-    webhook_id:
-      from_secret: discordwebhookid
-    webhook_token: 
-      from_secret: discordwebhooktoken
-    message: "Astro site has been built and pushed to dockerhub successfully"
-- name: deploy with ansible
-  image: plugins/ansible:3
-  settings:
-    playbook: ansible/astro.yml
-    inventory: ansible/hosts
-      # user: root
-      # private_key:
-      # from_secret: drone_ssh_priv
-        #    ssh_extra_args: "-o StrictHostKeyChecking=no"
-- name: discord notify ansible
-  image: appleboy/drone-discord
-  settings:
-    webhook_id:
-      from_secret: discordwebhookid
-    webhook_token:
-      from_secret: discordwebhooktoken
-    message: "Astro site was deployed through ansible successfully"
+  - ansible-playbook -i ansible/hosts ansible/astro.yml -u root
