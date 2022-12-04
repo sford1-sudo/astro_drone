@@ -22,7 +22,7 @@ steps:
       from_secret: discordwebhookid
     webhook_token:
       from_secret: discordwebhooktoken
-    message: "Astro site has been built and pushed to dockerhub successfully... please deploy with ansible playbook when ready for production"
+    message: "Astro site has been built and pushed to dockerhub successfully... when ready for prod use ansible script or promote to production deployment"
 - name: ssh-deploy
   image: appleboy/drone-ssh
   settings:
@@ -45,3 +45,16 @@ steps:
     target:
     - production
 
+- name: discord notify deploy
+  image: appleboy/drone-discord
+  settings:
+    webhook_id:
+      from_secret: discordwebhookid
+    webhook_token:
+      from_secret: discordwebhooktoken
+    message: "Astro site has been deployed successfully to the webservers"
+  when:
+    event:
+    - promote
+    target:
+    - production
