@@ -1,0 +1,13 @@
+- hosts: webserver
+  become: true
+
+  tasks:
+
+    - name: ensure sford1sudo/astro container is running
+      docker_container:
+        name: astro
+        state: started
+        image: "sford1sudo/astro:latest"
+        pull: true
+        ports:
+          - "80:80"

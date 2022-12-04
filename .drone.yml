@@ -23,3 +23,9 @@ steps:
     webhook_token: 
       from_secret: discordwebhooktoken
     message: "Astro site has been built and pushed to dockerhub successfully"
+- name: deploy with ansible
+  image: plugins/ansible:3
+  settings:
+    playbook: ansible/astro.yml
+    inventory: ansible/hosts
+    syntax_check: true
