@@ -3,7 +3,7 @@ name: AstroJS
 
 steps:
 - name: build astro
-  image: cimg/node:18.11.0
+  image: node
   commands:
   - npm install
   - npm run build
