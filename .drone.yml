@@ -15,7 +15,7 @@ steps:
       from_secret: dhubpass
     repo: sford1sudo/astro
     tags: latest
-- name: discord notification
+- name: discord notify docker
   image: appleboy/drone-discord
   settings:
     webhook_id:
@@ -29,7 +29,7 @@ steps:
     playbook: ansible/astro.yml
     inventory: ansible/hosts
     syntax_check: true
-- name: discord notification
+- name: discord notify ansible
   image: appleboy/drone-discord
   settings:
     webhook_id:
