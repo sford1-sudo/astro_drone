@@ -29,3 +29,11 @@ steps:
     playbook: ansible/astro.yml
     inventory: ansible/hosts
     syntax_check: true
+- name: discord notification
+  image: appleboy/drone-discord
+  settings:
+    webhook_id:
+      from_secret: discordwebhookid
+    webhook_token:
+      from_secret: discordwebhooktoken
+    message: "Astro site was deployed through ansible successfully"
