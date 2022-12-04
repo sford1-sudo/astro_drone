@@ -1,11 +1,25 @@
 kind: pipeline
-type: exec
-name: test ansible
-platform:
-  os: linux
-  arch: amd64
+name: AstroJS
 
 steps:
-- name: greeting
+- name: build astro
+  image: node
   commands:
-  - ansible-playbook -i ansible/hosts ansible/astro.yml -u root
+  - npm install
+  - npm run build
+- name: push to dockerhub
+  image: plugins/docker
+  settings:
+    username: sford1sudo
+    password:
+      from_secret: dhubpass
+    repo: sford1sudo/astro
+    tags: latest
+- name: discord notify docker
+  image: appleboy/drone-discord
+  settings:
+    webhook_id:
+      from_secret: discordwebhookid
+    webhook_token:
+      from_secret: discordwebhooktoken
+    message: "Astro site has been built and pushed to dockerhub successfully... please deploy with ansible playbook when ready for production"
