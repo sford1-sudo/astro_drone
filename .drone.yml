@@ -60,10 +60,11 @@ steps:
     - production
 ---
 kind: pipeline
-type: exec
+type: docker
 name: testing
 
 steps:
   - name: echo
+    image: ubuntu
     commands: 
     - echo "Helloworld" >> ~/yelling.txt
