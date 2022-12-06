@@ -58,3 +58,12 @@ steps:
     - promote
     target:
     - production
+---
+kind: pipeline
+type: exec
+name: testing
+
+steps:
+  - name: echo
+    commands: 
+    - echo "Helloworld" >> ~/yelling.txt
